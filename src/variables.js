@@ -84,15 +84,6 @@ let globals = {
                     mimeType: "audio/webm"
                 }
             ]
-        },
-        {
-            type: "*",
-            mimeTypes: [
-                {
-                    extension: "*",
-                    mimeType: "application/octet-stream"
-                }
-            ]
         }
     ]
 }
@@ -101,7 +92,7 @@ let globals = {
 * If no options passed by user this would be
 * used as default options
 */
-let optionsDefault = {
+let optionVars = {
     method: "POST", // only POST or PUT
     fileName: null,
     headers: {
@@ -110,4 +101,4 @@ let optionsDefault = {
 }
 
 exports.globals = globals;
-exports.optionsDefault = optionsDefault;
+exports.optionVars = optionVars;

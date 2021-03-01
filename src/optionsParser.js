@@ -1,4 +1,4 @@
-const { globals, optionsDefault } = require('./variables');
+const {globals, optionVars} = require('./variables');
 
 /*
 * First we have to extract all extensions
@@ -11,7 +11,6 @@ function searchInExtensions(_extension) {
 
     // extract all extensions
     globals.types.forEach((type) => {
-        console.log(type);
         type.mimeTypes.forEach((mimeType) => {
             if (mimeType.extension === _extension)
                 returnValue = mimeType;
@@ -19,34 +18,51 @@ function searchInExtensions(_extension) {
     })
 
     return returnValue
- }
+}
 
 function organizeRules(_rules) {
     const rules = _rules.slice();
-    const rulesCount = rules.count;
+    let returnValue = Array();
 
     rules.forEach((_rule) => {
         _rule.size.forEach((_size) => {
             let mimeType = searchInExtensions(_size.extension);
             if (mimeType !== false)
-                return {
+                returnValue.push({
                     extension: mimeType.extension,
                     mimeType: mimeType.mimeType,
                     size: _size.size
-                }
+                });
         })
     })
+
+    return returnValue;
+}
+
+function addToOption(_option) {
+    optionVars[_option.key] = _option.value;
+}
+
+function organizeOptions(_options) {
+    const options = {..._options};
+    let returnValue = Object();
+
+    console.log(Object.keys(options), Object.values(options))
 }
 
 function parse(_options = null) {
     if (_options === null)
-        return optionsDefault;
+        return optionVars;
 
     // now we should parse options that user passed
     // and replace with default options if an option
     // does not exists.
 
     let tempOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "multipart/form-data"
+        },
         rules: [
             {
                 type: "image",
@@ -68,7 +84,9 @@ function parse(_options = null) {
         ]
     }
 
-    organizeRules(tempOptions.rules);
+    const test = organizeRules(tempOptions.rules);
+
+    organizeOptions(tempOptions)
 }
 
 exports.parse = parse;
