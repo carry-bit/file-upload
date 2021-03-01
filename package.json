@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "Easily upload files with this package. You can apply various rules and filters to the uploader.",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/carry-bit/file-upload"
@@ -22,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/carry-bit/file-upload/issues"
   },
-  "homepage": "https://github.com/carry-bit/file-upload#readme"
+  "homepage": "https://github.com/carry-bit/file-upload#readme",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
 }
